@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товарів</title>
+</head>
+<body>
+    <h1>Список товарів</h1>
+    <a href="{% url 'add_product' %}">Додати товар</a>
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong> - {{ product.price }} грн
+                <br>
+                Категорія: {{ product.category }}
+                <br>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" width="100">
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
