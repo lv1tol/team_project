@@ -196,21 +196,62 @@
     </script>
 </head>
 <body>
-    <h1>Список товарів</h1>
-    <a onclick="location.href='/add'">Додати товар</a>
-    <ul>
-        {% for product in products %}
-            <li>
-                <strong>{{ product.name }}</strong> - {{ product.price }} грн
-                <br>
-                Категорія: {{ product.category }}
-                <br>
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" width="100">
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="sidebar expanded">
+        <div class="menu-lines" onclick="toggleSidebar()">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+        <div class="categories">
+            <div class="category-item">Категорія 1</div>
+            <div class="category-item">Категорія 2</div>
+            <div class="category-item">Категорія 3</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Логотип">
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-bar" placeholder="Пошук...">
+            </div>
+            <div class="user-info">
+                <img src="user-avatar.png" alt="Аватар користувача">
+                <span>Вітаємо, {{ user.username }}</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <span>СПОРТ</span>
+            <span>LIVE</span>
+            <span>КАЗИНО</span>
+            <span>КАЗИНО LIVE</span>
+            <span>ШВИДКІ ІГРИ</span>
+            <span>КІБЕРСПОРТ</span>
+            <span>FANTASY SPORT</span>
+            <span>АКЦІЇ</span>
+        </div>
+        <div class="content">
+            <h1>Список товарів</h1>
+            <a onclick="location.href='/add'">Додати товар</a>
+            <ul class="product-list">
+                {% for product in products %}
+                    <li>
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" width="100">
+                        {% endif %}
+                        <div>
+                            <strong>{{ product.name }}</strong> - {{ product.price }} грн
+                            <br>
+                            <span style="margin-left: 10px;">Категорія: {{ product.category }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
 
