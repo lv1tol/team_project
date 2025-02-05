@@ -1,24 +1,257 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Список товарів</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bazar Online</title>
+    <style>
+        body {
+            background-color: #5a6a50;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            background-color: #4a5a40;
+            width: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            transition: width 0.3s;
+            position: fixed;
+            height: 100vh;
+            overflow: hidden;
+            top: 90px;
+            left: 0;
+        }
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .menu-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .menu-line {
+            width: 15px;
+            height: 2px;
+            background-color: white;
+            border-radius: 2px;
+        }
+        .categories {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: white;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+        .sidebar.expanded .categories {
+            display: block;
+        }
+        .category-item {
+            background-color: #6b7d5a;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .category-item:hover {
+            background-color: #8ea078;
+        }
+        .main-content {
+            flex-grow: 1;
+            margin-left: 60px;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4a5a40;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #6b7d5a;
+            padding: 3px 10px;
+            border-radius: 15px;
+            border: 2px solid #8ea078;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        .search-icon {
+            padding: 3px;
+            color: white;
+        }
+        .search-bar {
+            flex-grow: 1;
+            border: none;
+            padding: 5px;
+            border-radius: 15px;
+            outline: none;
+            background-color: transparent;
+            color: white;
+            font-size: 14px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            background-color: #6b7d5a;
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 2px solid #8ea078;
+            color: white;
+        }
+        .user-info img {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .nav-links {
+            background-color: black;
+            color: white;
+            padding-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 16px;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            white-space: nowrap;
+        }
+        .content {
+            max-width: 1200px;
+            margin: 90px auto 20px;
+            padding: 20px;
+            background: #768e64;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .product-list li {
+            background: #9cab88;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .add-product {
+            display: inline-block;
+            background-color: #4a5a40;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 20px;
+        }
+        .add-product:hover {
+            background-color: #8ea078;
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('expanded');
+        }
+    </script>
 </head>
 <body>
-    <h1>Список товарів</h1>
-    <a href="{% url 'add_product' %}">Додати товар</a>
-    <ul>
-        {% for product in products %}
-            <li>
-                <strong>{{ product.name }}</strong> - {{ product.price }} грн
-                <br>
-                Категорія: {{ product.category }}
-                <br>
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" width="100">
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="sidebar expanded">
+        <div class="menu-lines" onclick="toggleSidebar()">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+        <div class="categories">
+            <div class="category-item">Категорія 1</div>
+            <div class="category-item">Категорія 2</div>
+            <div class="category-item">Категорія 3</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Логотип">
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-bar" placeholder="Пошук...">
+            </div>
+            <div class="user-info">
+                <img src="user-avatar.png" alt="Аватар користувача">
+                <span>Вітаємо, {{ user.username }}</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <span>СПОРТ</span>
+            <span>LIVE</span>
+            <span>КАЗИНО</span>
+            <span>КАЗИНО LIVE</span>
+            <span>ШВИДКІ ІГРИ</span>
+            <span>КІБЕРСПОРТ</span>
+            <span>FANTASY SPORT</span>
+            <span>АКЦІЇ</span>
+        </div>
+        <div class="content">
+            <h1>Список товарів</h1>
+            <a onclick="location.href='/add'">Додати товар</a>
+            <ul class="product-list">
+                {% for product in products %}
+                    <li>
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" width="100">
+                        {% endif %}
+                        <div>
+                            <strong>{{ product.name }}</strong> - {{ product.price }} грн
+                            <br>
+                            <span style="margin-left: 10px;">Категорія: {{ product.category }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
+
