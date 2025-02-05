@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -234,7 +235,7 @@
         </div>
         <div class="content">
             <h1>Список товарів</h1>
-            <a href="{% url 'add_product' %}" class="add-product">Додати товар</a>
+            <a onclick="location.href='/add'">Додати товар</a>
             <ul class="product-list">
                 {% for product in products %}
                     <li>
