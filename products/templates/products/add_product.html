@@ -2,15 +2,18 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Додати товар</title>
+    <title>Add product</title>
 </head>
 <body>
-    <h1>Додати товар</h1>
+    <h1>Add product</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Додати</button>
+        <button type="submit">Add</button>
     </form>
-    <a onclick="location.href='/'">Назад до списку</a>
+    <a onclick="location.href='/'">Back to list</a>
 </body>
 </html>
+
+
+
