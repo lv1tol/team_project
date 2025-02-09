@@ -17,15 +17,17 @@
             background-color: #4a5a40;
             width: 170px;
             display: flex;
+            position: fixed;
             flex-direction: column;
             align-items: center;
             padding: 10px 0;
             transition: width 0.3s;
             position: absolute;
-            height: 100vh;
+            height: 100%;
             overflow: hidden;
-            top: 90px;
+            top: 120px;
             left: 0;
+            z-index: 999;
         }
         .menu-icon {
             font-size: 24px;
@@ -53,6 +55,9 @@
             color: white;
             margin-top: 20px;
             margin-left: 10px;
+            position:absolute;
+            top: 40px;
+            left: 20px;
         }
         .sidebar.expanded .categories {
             display: block;
@@ -71,6 +76,7 @@
             flex-grow: 1;
             margin-left: 170px;
             padding: 20px;
+            margin-top: 60px;
         }
         .header {
             background-color: #4a5a40;
@@ -119,19 +125,27 @@
             font-size: 14px;
         }
         .user-info {
-            display: flex;
+            display: block;
+            text-align: center;
             align-items: center;
             background-color: #6b7d5a;
-            padding: 5px 10px;
-            border-radius: 15px;
+            padding: 1px 1px;
+            border-radius: 15%;
             border: 2px solid #8ea078;
             color: white;
+            width: 100px;
         }
         .user-info img {
-            height: 30px;
-            width: 30px;
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 40px;
             border-radius: 50%;
-            margin-right: 10px;
+            /* margin-right: 10px; */
+        }
+        .user-info span {
+            display: block;
+            margin-top: 5px; 
         }
         .nav-links {
             background-color: black;
@@ -142,7 +156,7 @@
             gap: 15px;
             font-size: 16px;
             position: fixed;
-            top: 60px;
+            top: 90px;
             left: 0;
             right: 0;
             z-index: 999;
@@ -207,6 +221,7 @@
             <div class="category-item">Category 2</div>
             <div class="category-item">Category 3</div>
         </div>
+        <span style="margin-top: 40px;">Filter1<br>Filter2</span>
     </div>
 
     <div class="main-content">
@@ -219,8 +234,8 @@
                 <input type="text" class="search-bar" placeholder="Search...">
             </div>
             <div class="user-info">
-                <img src="user-avatar.png" alt="Avatar">
-                <span>{{ user.username }}</span>
+                <img src="site_images/ava1.png" alt="Avatar">
+                <span>User{{ user.username }}</span>
             </div>
         </div>
         <div class="nav-links">
