@@ -7,8 +7,16 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 # Список товарів
 def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'products/product_list.html', {'products': products})
+    category = request.GET.get("category", "")  
+    if category:
+        products = Product.objects.filter(category=category)
+    else:
+        products = Product.objects.all()
+
+    return render(request, 'products/product_list.html', {
+        'products': products,
+        'selected_category': category,
+    })
 
 # Додавання товару
 
