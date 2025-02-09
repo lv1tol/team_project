@@ -1,19 +1,115 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Add product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/designe.css' %}">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #5a6a4f;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #8a9a6d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #556b2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #6b8e23;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function toggleNewCategoryInput() {
+            var categorySelect = document.getElementById("categorySelect");
+            var newCategoryInput = document.getElementById("newCategoryInput");
+
+            if (categorySelect.value === "new") {
+                newCategoryInput.style.display = "block";
+                newCategoryInput.required = true;
+            } else {
+                newCategoryInput.style.display = "none";
+                newCategoryInput.required = false;
+            }
+        }
+    </script>
 </head>
 <body>
-    <h1>Add product</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add</button>
-    </form>
-    <a onclick="location.href='/'">Back to list</a>
+    <div class="container">
+        <h1>Add Product</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="name">Product Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" required>
+
+            <label for="category">Category:</label>
+            <select name="category" id="categorySelect" onchange="toggleNewCategoryInput()" required>
+                <option value="" disabled selected>Select a category</option>
+                {% for value, label in form.category.field.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+                <option value="new">New Category</option>
+            </select>
+
+            <input type="text" name="new_category" id="newCategoryInput" placeholder="Enter a new category" style="display: none;">
+
+            <label for="image">Image:</label>
+            <input type="file" name="image">
+
+            <button type="submit">Add</button>
+        </form>
+
+        <a href="/" class="back-link">Back to list</a>
+    </div>
 </body>
 </html>
-
-
-
