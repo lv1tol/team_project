@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -72,12 +73,11 @@
             padding: 20px;
         }
         .header {
-            background-color: #4a5a40;
-            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: white;
+            background-color: #4a5a40;
+            padding: 15px 20px;
             position: fixed;
             top: 0;
             left: 0;
@@ -126,6 +126,11 @@
             border: 2px solid #8ea078;
             color: white;
         }
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
         .user-info img {
             height: 30px;
             width: 30px;
@@ -133,28 +138,42 @@
             margin-right: 10px;
         }
         .nav-links {
-            background-color: black;
-            color: white;
-            padding-top: 18px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 16px;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            white-space: nowrap;
-        }
-        .content {
-            max-width: 1200px;
-            margin: 90px auto 20px;
-            padding: 20px;
-            background: #768e64;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    background-color: black;
+    color: white;
+    padding: 18px 10px; 
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; 
+    font-size: 16px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    color: white !important; 
+    text-decoration: none; 
+    border: 2px solid white; 
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+.content {
+    width: 85%; 
+    max-width: 1400px; 
+    margin: 120px auto 20px; 
+    padding: 20px;
+    background: #768e64;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
         .product-list {
             list-style: none;
             padding: 0;
@@ -181,7 +200,6 @@
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s, transform 0.2s;
-            margin-bottom: 20px;
         }
         .add-product:hover {
             background-color: #8ea078;
@@ -195,66 +213,58 @@
     </script>
 </head>
 <body>
-    <div class="sidebar expanded">
-        <div class="menu-lines" onclick="toggleSidebar()">
-            <div class="menu-line"></div>
-            <div class="menu-line"></div>
-            <div class="menu-line"></div>
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="logo">
         </div>
-        <div class="categories">
-            <div class="category-item">Category 1</div>
-            <div class="category-item">Category 2</div>
-            <div class="category-item">Category 3</div>
+    
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-bar" placeholder="Search...">
+        </div>
+    
+        <div class="user-section">
+            <a class="add-product" onclick="location.href='/add'">Add Product</a>
+            <div class="user-info">
+                <img src="site_images/ava1.png" alt="Avatar">
+                <span>User{{ user.username }}</span>
+            </div>
         </div>
     </div>
-
-    <div class="main-content">
-        <div class="header">
-            <div class="logo">
-                <img src="logo.png" alt="logo">
-            </div>
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-bar" placeholder="Search...">
-            </div>
-            <div class="user-info">
-                <img src="user-avatar.png" alt="Avatar">
-                <span>{{ user.username }}</span>
-            </div>
-        </div>
-        <div class="nav-links">
-            <a href="?category=Авто">Авто</a>
-            <a href="?category=Дім Сад">Дім Сад</a>
-            <a href="?category=Електроніка">Електроніка</a>
-            <a href="?category=Одяг">Одяг</a>
-            <a href="?category=Нерухомість">Нерухомість</a>
-            <a href="?category=Для Авто">Для Авто</a>
-            <a href="?category=Дитячий Світ">Дитячий Світ</a>
-            <a href="?category=Для Геймерів">Для Геймерів</a>
-        </div>
-        
-        <div class="content">
-            <h1>Catalog</h1>
-            <a class="add-product" onclick="location.href='/add'">Add Product</a>
-        
-            {% if selected_category %}
-                <h2>Category: {{ selected_category }}</h2>
-            {% endif %}
-        
-            <ul class="product-list">
-                {% for product in products %}
-                    <li>
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" width="100">
-                        {% endif %}
-                        <div>
-                            <strong>{{ product.name }}</strong> - {{ product.price }} uan
-                            <br>
-                            <span>Category: {{ product.category }}</span>
-                        </div>
-                    </li>
-                {% empty %}
-                    <p>No products in this category.</p>
-                {% endfor %}
-            </ul>
-        </div>
+    
+    <div class="nav-links">
+        <a href="?category=Авто">Авто</a>
+        <a href="?category=Дім Сад">Дім Сад</a>
+        <a href="?category=Електроніка">Електроніка</a>
+        <a href="?category=Одяг">Одяг</a>
+        <a href="?category=Нерухомість">Нерухомість</a>
+        <a href="?category=Для Авто">Для Авто</a>
+        <a href="?category=Дитячий Світ">Дитячий Світ</a>
+        <a href="?category=Для Геймерів">Для Геймерів</a>
+    </div>
+    
+    
+    <div class="content">
+        <h1 style="text-align: center;">Catalog</h1>
+    
+        {% if selected_category %}
+            <h2 style="text-align: center;">Category: {{ selected_category }}</h2>
+        {% endif %}
+    
+        <ul class="product-list">
+            {% for product in products %}
+                <li>
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" width="100">
+                    {% endif %}
+                    <div>
+                        <strong>{{ product.name }}</strong> - {{ product.price }} ₴
+                        <br>
+                        <span>Category: {{ product.category }}</span>
+                    </div>
+                </li>
+            {% empty %}
+                <p style="text-align: center;">No products in this category.</p>
+            {% endfor %}
+        </ul>
+    </div>

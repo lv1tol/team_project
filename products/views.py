@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Product
-from .forms import ProductForm
+from .models import Product 
 import os
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
+from .forms import ProductForm
+
+
 
 # Список товарів
 def product_list(request):
@@ -21,14 +23,19 @@ def product_list(request):
 # Додавання товару
 
 
+
+
 def add_product(request):
-    form = ProductForm()
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("/")
-    return render(request, "products/add_product.html", {"form": form, "id": id})
+            return redirect("/")  
+    else:
+        form = ProductForm()
+
+    return render(request, "products/add_product.html", {"form": form})
+
 
 # Оновлення товару 
 def edit_product(request, id):
