@@ -1,11 +1,5 @@
 from django.db import models
 
-class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-
-    def __str__(self):
-        return self.name
-
 class Product(models.Model):
     CATEGORY_CHOICES = [
         ('Авто', 'Авто'),
@@ -15,6 +9,7 @@ class Product(models.Model):
         ('Нерухомість', 'Нерухомість'),
         ('Дитячий світ', 'Дитячий світ'),
         ('Для геймерів', 'Для геймерів'),
+        ('Інше', 'Інше'),
     ]
 
     name = models.CharField(max_length=255)

@@ -1,62 +1,67 @@
 body {
+    background-color: #4f5d42;
     font-family: Arial, sans-serif;
-    background-color: #5a6a4f;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .container {
-    background-color: #8a9a6d;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-h1 {
+.form-container {
+    background-color: #7b8656;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 350px;
+}
+
+.form-container h2 {
     text-align: center;
-    color: #fff;
+    color: white;
 }
 
 label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
-    color: #fff;
+    color: white;
 }
 
 input, select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #556b2f;
+    background-color: #4f5d42;
     color: white;
     border: none;
     border-radius: 5px;
+    margin-top: 10px;
     cursor: pointer;
-    margin-top: 15px;
 }
 
 button:hover {
-    background-color: #6b8e23;
+    background-color: #3c4532;
 }
 
 .back-link {
     display: block;
     text-align: center;
     margin-top: 10px;
-    color: #fff;
+    color: white;
     text-decoration: none;
 }
 
