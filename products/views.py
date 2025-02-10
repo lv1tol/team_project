@@ -56,3 +56,10 @@ def delete_product(request, id):
         return HttpResponse("Guitar not found")
     product.delete()
     return redirect("/")
+
+def details(request, id):
+    try:
+        product = Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        return HttpResponse("Product not found")
+    return render(request, "products/details.html", {'product': product})
