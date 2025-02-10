@@ -1,18 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="">
-</head>
+{% extends "products/product_list.html" %}
+
+{% block content %}
+<style>
+
+    .product-details {
+        background-color: #8a9a6d;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        padding-top: 5%;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: white;
+        text-align: center;
+    }
+    
+    .product-details h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .product-details p {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .product-details img {
+        display: block;
+        margin: 20px auto;
+    }
+</style>
 <body>
     <div class="product-details">
+        <img src="{{ product.image.url }}" width="400">
         <h1>{{ product.name }}</h1>
         <p>{{ product.description }}</p>
         <p>Price: {{ product.price }}₴</p>
         <p>Category: {{ product.category }}</p>
-        <img src="{{ product.image.url }}" width="100">
     </div>
 </body>
 </html>
+{% endblock %}

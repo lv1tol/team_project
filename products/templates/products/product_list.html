@@ -6,7 +6,7 @@
     <title>Bazar Online</title>
     <style>
         body {
-            background-color: #5a6a50;
+            background-color: #5a6a4f;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -246,31 +246,33 @@
             </div>
         </div>
     </div>
-    
-    <div class="nav-links">
-        <a href="?category=Авто">Авто</a>
-        <a href="?category=Дім Сад">Дім Сад</a>
-        <a href="?category=Електроніка">Електроніка</a>
-        <a href="?category=Одяг">Одяг</a>
-        <a href="?category=Нерухомість">Нерухомість</a>
-        <a href="?category=Для Авто">Для Авто</a>
-        <a href="?category=Дитячий Світ">Дитячий Світ</a>
-        <a href="?category=Для Геймерів">Для Геймерів</a>
-    </div>
-    
-    
-    <div class="content">
-        <h1 style="text-align: center;">Catalog</h1>
-    
-        {% if selected_category %}
+    <div style="position: fixed; width: 100%;display: block;">
+    {% block content %}
+
+        <div class="nav-links">
+            <a href="?category=Авто">Авто</a>
+            <a href="?category=Дім Сад">Дім Сад</a>
+            <a href="?category=Електроніка">Електроніка</a>
+            <a href="?category=Одяг">Одяг</a>
+            <a href="?category=Нерухомість">Нерухомість</a>
+            <a href="?category=Для Авто">Для Авто</a>
+            <a href="?category=Дитячий Світ">Дитячий Світ</a>
+            <a href="?category=Для Геймерів">Для Геймерів</a>
+        </div>
+        
+        
+        <div class="content">
+            <h1 style="text-align: center;">Catalog</h1>
+            
+            {% if selected_category %}
             <h2 style="text-align: center;">Category: {{ selected_category }}</h2>
-        {% endif %}
-    
-        <ul id="product-list" class="product-list">
-            {% for product in products %}
+            {% endif %}
+            
+            <ul id="product-list" class="product-list">
+                {% for product in products %}
                 <li onclick="location.href='/details/{{ product.id }}'">
                     {% if product.image %}
-                        <img src="{{ product.image.url }}" width="100">
+                    <img src="{{ product.image.url }}" width="100">
                     {% endif %}
                     <div>
                         <strong>{{ product.name }}</strong> - {{ product.price }}₴
@@ -278,8 +280,10 @@
                         <span>Category: {{ product.category }}</span>
                     </div>
                 </li>
-            {% empty %}
+                {% empty %}
                 <p style="text-align: center;">No products in this category.</p>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </ul>
+        {% endblock %}
     </div>
