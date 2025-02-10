@@ -1,4 +1,6 @@
+{% extends "products/product_list.html" %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -8,11 +10,11 @@
     <title>Add Product</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #5a6a4f;
+            display: grid;
+            place-items: center;
             margin: 0;
+            font-family: Arial, sans-serif;
             padding: 0;
-            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -35,11 +37,14 @@
             color: #fff;
         }
         input, select {
-            width: 100%;
+            width: 95%;
             padding: 8px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+        }
+        select {
+            width: 100%;
         }
         button {
             width: 100%;
@@ -81,7 +86,7 @@
     </script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="margin-left: 33%;">
         <h1>Add Product</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -113,3 +118,4 @@
     </div>
 </body>
 </html>
+{% endblock %}
