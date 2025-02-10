@@ -6,18 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/designe.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'designe.css' %}">
     <title>Add Product</title>
     <style>
         body {
-            display: grid;
-            place-items: center;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            padding: 0;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            padding-left: 69%;
+            font-family: Arial, sans-serif;
         }
         .container {
             background-color: #8a9a6d;
@@ -36,7 +35,7 @@
             font-weight: bold;
             color: #fff;
         }
-        input, select {
+        input, select, textarea {
             width: 95%;
             padding: 8px;
             margin-top: 5px;
@@ -70,23 +69,9 @@
             text-decoration: underline;
         }
     </style>
-    <script>
-        function toggleNewCategoryInput() {
-            var categorySelect = document.getElementById("categorySelect");
-            var newCategoryInput = document.getElementById("newCategoryInput");
-
-            if (categorySelect.value === "new") {
-                newCategoryInput.style.display = "block";
-                newCategoryInput.required = true;
-            } else {
-                newCategoryInput.style.display = "none";
-                newCategoryInput.required = false;
-            }
-        }
-    </script>
 </head>
 <body>
-    <div class="container" style="margin-left: 33%;">
+    <div class="container">
         <h1>Add Product</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -97,16 +82,15 @@
             <label for="price">Price:</label>
             <input type="number" name="price" required>
 
+            <label for="description">Description:</label>
+            <textarea name="description" rows="3" required></textarea>
+
             <label for="category">Category:</label>
-            <select name="category" id="categorySelect" onchange="toggleNewCategoryInput()" required>
-                <option value="" disabled selected>Select a category</option>
+            <select name="category" required>
                 {% for value, label in form.category.field.choices %}
                     <option value="{{ value }}">{{ label }}</option>
                 {% endfor %}
-                <option value="new">New Category</option>
             </select>
-
-            <input type="text" name="new_category" id="newCategoryInput" placeholder="Enter a new category" style="display: none;">
 
             <label for="image">Image:</label>
             <input type="file" name="image">

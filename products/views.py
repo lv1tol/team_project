@@ -5,26 +5,29 @@ from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import ProductForm
 
-
-
 # Список товарів
 def product_list(request):
     category = request.GET.get("category", "") 
+    sort_order = request.GET.get("sort", "asc")  
+
     if category:
         products = Product.objects.filter(category=category)
     else:
         products = Product.objects.all()
 
+    if sort_order == "asc":
+        products = products.order_by("price") 
+    else:
+        products = products.order_by("-price")  
+
     return render(request, 'products/product_list.html', {
         'products': products,
         'selected_category': category,
+        'sort_order': sort_order,
     })
 
+
 # Додавання товару
-
-
-
-
 def add_product(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
@@ -35,7 +38,6 @@ def add_product(request):
         form = ProductForm()
 
     return render(request, "products/add_product.html", {"form": form})
-
 
 # Оновлення товару 
 def edit_product(request, id):
@@ -53,10 +55,11 @@ def edit_product(request, id):
 def delete_product(request, id):
     product = Product.objects.get(pk=id)
     if product is None:
-        return HttpResponse("Guitar not found")
+        return HttpResponse("Product not found")
     product.delete()
     return redirect("/")
 
+# Деталі товару
 def details(request, id):
     try:
         product = Product.objects.get(id=id)

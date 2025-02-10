@@ -10,10 +10,11 @@ class ProductForm(forms.ModelForm):
         ('Нерухомість', 'Нерухомість'),
         ('Дитячий світ', 'Дитячий світ'),
         ('Для геймерів', 'Для геймерів'),
+        ('Інше', 'Інше'),
     ]
 
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, label="Category")
 
     class Meta:
         model = Product
-        fields = ['name', 'price', 'category', 'image']
+        fields = ['name', 'price', 'description', 'category', 'image']
