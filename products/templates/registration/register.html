@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мій сайт{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Ласкаво просимо</h1>
+        <nav>
+            <a href="/">Головна</a>
+        </nav>
+    </header>
+
+    
+    <h2>Register</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+        <p>Already have an account? <a href="/accounts/login/">Login</a></p>
+    </form>
+</body>
+</html>

@@ -268,7 +268,7 @@
     
         <div class="user-section">
             <a class="add-product" href="/add">Add Product</a>
-            
+            <a class="add-product" href="/my_listings">Мої оголошення</a>
             <a href="?sort={% if sort_order == 'asc' %}desc{% else %}asc{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}" 
                class="sort-button">
                 {% if sort_order == "asc" %}
@@ -279,8 +279,10 @@
             </a>
     
             <div class="user-info">
-                <img src="site_images/ava1.png" alt="Avatar">
-                <span>User{{ user.username }}</span>
+                <a href="/accounts/login/">
+                    <img src="site_images/ava1.png" alt="Avatar">
+                    <span>{{ user.username }}</span>
+                </a>
             </div>
         </div>
     </div>
