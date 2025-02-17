@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль</title>
+</head>
+<body>
+    <h1>Ваш профіль</h1>
+    <nav>
+        <a href="/">Головна</a>
+    </nav>
+    <p>Аватар: {{ user.avatar }}</p>
+    <img src="{{ user.profile.avatar.url }}" alt="Avatar">
+    <p>Ім'я користувача: {{ user.username }}</p>
+    <p>Ім'я: {{ user.first_name }}</p>
+    <p>Прізвище: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Вийти</button>
+    </form>
+</body>
+</html>

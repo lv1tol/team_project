@@ -1,14 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import User  
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def str(self):
+        return self.name
 
 class Product(models.Model):
     CATEGORY_CHOICES = [
         ('Авто', 'Авто'),
         ('Електроніка', 'Електроніка'),
-        ('Дім і сад', 'Дім і сад'),
+        ('Дім сад', 'Дім сад'),
         ('Одяг', 'Одяг'),
         ('Нерухомість', 'Нерухомість'),
         ('Дитячий світ', 'Дитячий світ'),
-        ('Для геймерів', 'Для геймерів'),
+        ('Тварини', 'Тварини'),
         ('Інше', 'Інше'),
     ]
 
@@ -17,6 +24,14 @@ class Product(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)  
     image = models.ImageField(upload_to='product_images/', blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def str(self):
+        return f"{self.name} - {self.author.username}"
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatars/', default='site_images/ava1.png', blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.user.username
