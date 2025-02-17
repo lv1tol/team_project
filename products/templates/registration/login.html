@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Мій сайт{% endblock %}</title>
+    <title>{% block title %}Логін{% endblock %}</title>
 </head>
 <body>
     <header>
@@ -18,8 +18,11 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        {% if form.errors %}
+            <p style="color: red;">Неправильний логін або пароль.</p>
+        {% endif %}
         <button type="submit">Login</button>
-        <p>Don't have an account? <a href="/accounts/register/">Register</a></p>
+        <p>Don't have an account? <a href="/register/">Register</a></p>
     </form>
 </body>
 </html>

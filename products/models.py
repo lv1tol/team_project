@@ -28,3 +28,10 @@ class Product(models.Model):
 
     def str(self):
         return f"{self.name} - {self.author.username}"
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatars/', default='site_images/ava1.png', blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username

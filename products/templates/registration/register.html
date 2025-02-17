@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Мій сайт{% endblock %}</title>
+    <title>{% block title %}Реєстрація{% endblock %}</title>
 </head>
 <body>
     <header>
@@ -19,7 +19,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Register</button>
-        <p>Already have an account? <a href="/accounts/login/">Login</a></p>
+        <p>Already have an account? <a href="/login/">Login</a></p>
     </form>
 </body>
 </html>

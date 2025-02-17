@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Мій сайт{% endblock %}</title>
-</head>
+
+
+{% extends "products/product_list.html" %}
+    
+{% block content %}
 <body>
     <header>
         <h1>Ласкаво просимо</h1>
@@ -14,10 +12,14 @@
     </header>
     <h2>Мої оголошення</h2>
     <ul>
+        <a href="{% url 'add_product' %}">Додати оголошення</a>
         {% for product in products %}
             <li>
                 <h3>{{ product.name }}</h3>
                 <p>Ціна: {{ product.price }} грн</p>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
+                {% endif %}
                 <a href="{% url 'details' product.id %}">Детальніше</a>
                 <a href="{% url 'edit_product' product.id %}">Редагувати</a>
                 <a href="{% url 'delete_product' product.id %}">Видалити</a>
@@ -28,3 +30,4 @@
     </ul>
 </body>
 </html>
+{% endblock %}
