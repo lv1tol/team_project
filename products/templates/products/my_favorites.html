@@ -1,0 +1,23 @@
+{% extends "products/product_list.html" %}
+
+{% block content %}
+    <h1>My Favorites</h1>
+    <ul id="product-list" class="product-list">
+        {% for product in products %}
+            <li onclick="location.href='/details/{{ product.id }}'" style="cursor: pointer;">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" width="100">
+                {% endif %}
+                <div>
+                    <strong>{{ product.name }}</strong> - {{ product.price }}₴
+                    <br>
+                    <span>Category: {{ product.category }}</span>
+                    <br>
+                </div>
+                <a href="{% url 'add_to_favorites' product.id %}">Remove from Favorites</a>
+            </li>
+        {% empty %}
+            <p style="text-align: center;">You have no favorite products.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
