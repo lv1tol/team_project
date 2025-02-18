@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Profile
 from django.http import HttpResponse
 from .forms import ProductForm
@@ -70,6 +70,21 @@ def delete_product(request, id):
 def my_listings(request):
     products = Product.objects.filter(author=request.user)
     return render(request, 'products/my_listings.html', {'products': products})
+
+@login_required
+def add_to_favorites(request, id):
+    product = get_object_or_404(Product, id=id)
+    if product.favorites.filter(id=request.user.id).exists():
+        product.favorites.remove(request.user)
+    else:
+        product.favorites.add(request.user)
+    return redirect('product_list')
+
+#  Мої вподобання
+@login_required
+def my_favorites(request):
+    products = Product.objects.filter(favorites=request.user)
+    return render(request, 'products/my_favorites.html', {'products': products})
 
 # Реєстрація
 def register(request):

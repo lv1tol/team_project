@@ -39,6 +39,13 @@
         <p>Price: {{ product.price }}₴</p>
         <p>Category: {{ product.category }}</p>
         <p>Автор: {{ user.username }}</p>
+        <a href="{% url 'add_to_favorites' product.id %}">
+            {% if user in product.favorites.all %}
+                Remove from Favorites
+            {% else %}
+                Add to Favorites
+            {% endif %}
+        </a>
     </div>
 </body>
 </html>
