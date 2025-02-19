@@ -39,11 +39,11 @@
         <p>Price: {{ product.price }}₴</p>
         <p>Category: {{ product.category }}</p>
         <p>Автор: {{ user.username }}</p>
-        <a href="{% url 'add_to_favorites' product.id %}">
+        <a href="{% url 'add_to_favorites' product.id %}" style="margin-left: 0px;">
             {% if user in product.favorites.all %}
-                Remove from Favorites
+                <img src="/sprites/heart.png" alt="" style="margin-left: 85%" width="50px"></img>
             {% else %}
-                Add to Favorites
+                <img src="/sprites/love.png" alt="" style="margin-left: 85%" width="50px"></img>
             {% endif %}
         </a>
     </div>

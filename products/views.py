@@ -78,7 +78,7 @@ def add_to_favorites(request, id):
         product.favorites.remove(request.user)
     else:
         product.favorites.add(request.user)
-    return redirect('product_list')
+    return redirect(request.META.get('HTTP_REFERER', 'product_list'))
 
 #  Мої вподобання
 @login_required
