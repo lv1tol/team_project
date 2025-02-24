@@ -1,14 +1,44 @@
 {% extends "products/product_list.html" %}
-
 {% block content %}
+<style>
+    body {
+        color:#d4d121;
+        background-color: #272727;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        justify-self: center;
+        background-color: #1d1d1d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 13%;
+            height: 1050px;
+            width: 80%;
+            border-left: 2px solid #d4d121;
+            border-right: 2px solid #d4d121;
+    }
+    a {
+        color: #d4d121;
+        text-decoration: none;
+        gap: 0px 10px;
+    }
+</style>
     <h1>My Favorites</h1>
-    <ul id="product-list" class="product-list">
-        {% for product in products %}
+    <div class="container">
+        <ul id="product-list" class="product-list">
+            {% for product in products %}
             <li onclick="location.href='/details/{{ product.id }}'" style="cursor: pointer;">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" width="100">
+                <img src="{{ product.image.url }}" width="100">
                 {% endif %}
                 <div>
+                    <br>
                     <strong>{{ product.name }}</strong> - {{ product.price }}₴
                     <br>
                     <span>Category: {{ product.category }}</span>
@@ -16,8 +46,9 @@
                 </div>
                 <a href="{% url 'add_to_favorites' product.id %}">Remove from Favorites</a>
             </li>
-        {% empty %}
+            {% empty %}
             <p style="text-align: center;">You have no favorite products.</p>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

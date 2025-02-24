@@ -2,33 +2,32 @@
 
 {% block content %}
 <style>
-
+    body {
+        color:#d4d121;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background-image: url("/sprites/back4.png");
+    }
     .product-details {
-        background-color: #8a9a6d;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        padding-top: 5%;
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        color: white;
-        text-align: center;
+        justify-self: center;
+        background-color: #1d1d1d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding-top: 5%;
+            margin-top: 13%;
+            height: 1000px;
+            width: 400px;
+            border-left: 2px solid #d4d121;
+            border-right: 2px solid #d4d121;
     }
-    
-    .product-details h1 {
-        font-size: 2em;
-        margin-bottom: 10px;
-    }
-
-    .product-details p {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-
-    .product-details img {
-        display: block;
-        margin: 20px auto;
+    a {
+        color: #d4d121;
+        text-decoration: none;
+        gap: 0px 10px;
     }
 </style>
 <body>
@@ -38,7 +37,7 @@
         <p>{{ product.description }}</p>
         <p>Price: {{ product.price }}₴</p>
         <p>Category: {{ product.category }}</p>
-        <p>Автор: {{ user.username }}</p>
+        <p>Author: {{ product.author }}</p>
         <a href="{% url 'add_to_favorites' product.id %}">
             {% if user in product.favorites.all %}
                 Remove from Favorites
