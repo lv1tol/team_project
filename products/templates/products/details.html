@@ -38,7 +38,7 @@
         <p>{{ product.description }}</p>
         <p>Price: {{ product.price }}₴</p>
         <p>Category: {{ product.category }}</p>
-        <p>Автор: {{ user.username }}</p>
+        <p>Автор: {{ product.author }}</p>
         <a href="{% url 'add_to_favorites' product.id %}">
             {% if user in product.favorites.all %}
                 Remove from Favorites
