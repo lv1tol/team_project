@@ -1,36 +1,75 @@
-
-
 {% extends "products/product_list.html" %}
     
 {% block content %}
+<style>
+    body {
+        color:#d4d121;
+        background-color: #272727;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        justify-self: center;
+        background-color: #1d1d1d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 9%;
+            height: 900px;
+            width: 80%;
+            border-left: 2px solid #d4d121;
+            border-right: 2px solid #d4d121;
+    }
+    a {
+        color: #d4d121;
+        text-decoration: none;
+        gap: 0px 10px;
+    }
+    li {
+        list-style-type: none;
+        height: 250px;
+        margin: 10px;
+        padding: 10px;
+        border-bottom: 3px solid #d4d121;
+        border-radius: 10px;
+        background-color: #272727;
+        max-width: 250px;
+    }
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 0px 10px;
+    }
+</style>
 <body>
-    <header>
-        <h1>Ласкаво просимо</h1>
-        <nav>
-            <a href="/">Головна</a>
-        </nav>
-    </header>
-    <h2>Мої оголошення</h2>
-    <ul>
-        <a href="{% url 'add_product' %}">Додати оголошення</a>
-        {% for product in products %}
-            <li>
+    <div class="container">
+        <h2>My advertisement</h2>
+        <ul>
+            {% for product in products %}
+            <li style="display:inline-flex">
                 <a href="{% url 'details' product.id %}">
-                <h3>{{ product.name }}</h3>
-                <p>Ціна: {{ product.price }} грн</p>
-                {% if product.image %}
+                    <h3>{{ product.name }}</h3>
+                    <p>Price: {{ product.price }} ghr</p>
+                    {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
-                {% endif %}
-
+                    {% endif %}
+                    
                 </a>
-                <br>
-                <a href="{% url 'edit_product' product.id %}">Редагувати</a>
-                <a href="{% url 'delete_product' product.id %}">Видалити</a>
+                <div class="actions">
+                    <a href="{% url 'edit_product' product.id %}">Edit</a>
+                    <a>/</a>
+                    <a href="{% url 'delete_product' product.id %}">Delete</a>
+                </div>
             </li>
-        {% empty %}
-            <p>У вас немає активних оголошень.</p>
-        {% endfor %}
-    </ul>
+            {% empty %}
+            <p>You dont have active advertisement...</p>
+            {% endfor %}
+        </ul>
+</div>
 </body>
 </html>
 {% endblock %}

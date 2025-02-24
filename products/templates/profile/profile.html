@@ -1,3 +1,30 @@
+{% extends "products/product_list.html" %}
+    
+{% block content %}
+<style>
+    body {
+        color:#d4d121;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url("/sprites/back4.png");
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        justify-self: center;
+        background-color: #1d1d1d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 8%;
+            height: 900px;
+            width: 27.%;
+            border-left: 2px solid #d4d121;
+            border-right: 2px solid #d4d121;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -6,19 +33,20 @@
     <title>Профіль</title>
 </head>
 <body>
-    <h1>Ваш профіль</h1>
-    <nav>
-        <a href="/">Головна</a>
-    </nav>
-    <p>Аватар: {{ user.avatar }}</p>
-    <img src="{{ user.profile.avatar.url }}" alt="Avatar">
-    <p>Ім'я користувача: {{ user.username }}</p>
-    <p>Ім'я: {{ user.first_name }}</p>
-    <p>Прізвище: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Вийти</button>
-    </form>
+    <div class="container">
+
+        <h1>{{ user.first_name }} ({{ user.username }}) {{ user.last_name }}</h1>
+        <p>{{ user.avatar }}</p>
+        <img src="{{ '/site_images/ava1.png' }}" alt="Avatar">
+        <p>Ім'я користувача: {{ user.username }}</p>
+        <p>Ім'я: {{ user.first_name }}</p>
+        <p>Прізвище: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Вийти</button>
+        </form>
+    </div>
 </body>
 </html>
+{% endblock %}
