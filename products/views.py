@@ -61,14 +61,14 @@ def edit_product(request, id):
             return redirect('/')
     else:
         form = ProductForm(instance=product)
-    return render(request, 'products/edit_product.html', {'form': form})
+    return render(request, 'products/edit_product.html', {'form': form, 'product': product})
 
 # Видалення товару
 @login_required
 def delete_product(request, id):
     product = Product.objects.get(pk=id)
     if product is None:
-        return HttpResponse("Guitar not found")
+        return HttpResponse("Product not found")
     product.delete()
     return redirect("/")
 

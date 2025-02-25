@@ -115,6 +115,7 @@
             outline: none;
             background-color: transparent;
             font-size: 14px;
+            color: #d4d121;
         }
         .user-info {
             display: flex;
@@ -175,7 +176,7 @@
     height: 2000000px;
     margin-top: 9%; 
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px #00000033;
     background-color: #1d1d1d;
     border-left: #d4d121 3px solid;
     border-right: #d4d121 3px solid;
@@ -270,7 +271,7 @@
 <body>
     <div class="header">
         <div class="logo">
-            <img onclick="location.href = '/'" src="/sprites/logo.png" alt="logo">
+            <img onclick="location.href = '/'" src="/sprites/logo.png" alt="logo" style="cursor: pointer;">
         </div>
         <div class="search-container">
             <img class="search-icon" src="/sprites/search.png" alt="search">
@@ -286,7 +287,7 @@
                 
                 {% if user.is_authenticated %}
                 <a href="{% url 'profile' %}">
-                    <img src="{{ 'site_images/ava1.png' }}" alt="Avatar">
+                    <img src="{{ '/site_images/ava1.png' }}" alt="Avatar">
                 </a>
                 {% else %}
                 <a href="{% url 'login' %}" style="color: #d4d121;">Log in</a>

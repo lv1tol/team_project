@@ -4,14 +4,14 @@ from django.contrib.auth.models import User
 
 class ProductForm(forms.ModelForm):
     CATEGORY_CHOICES = [
-        ('Авто', 'Авто'),
-        ('Електроніка', 'Електроніка'),
-        ('Дім і сад', 'Дім і сад'),
-        ('Одяг', 'Одяг'),
-        ('Нерухомість', 'Нерухомість'),
-        ('Дитячий світ', 'Дитячий світ'),
-        ('Тварини', 'Тварини'),
-        ('Інше', 'Інше'),
+        ('Auto', 'Auto'),
+        ('Electronics', 'Electronics'),
+        ('Home/Garden', 'Home/Garden'),
+        ('Clothes', 'Clothes'),
+        ('Realty', 'Realty'),
+        ('Toys', 'Toys'),
+        ('Animals', 'Animals'),
+        ('Other', 'Other'),
     ]
 
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, label="Category")

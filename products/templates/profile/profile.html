@@ -24,6 +24,24 @@
             border-left: 2px solid #d4d121;
             border-right: 2px solid #d4d121;
     }
+    button {
+        display: inline-flex;
+        top: 80%;
+        width: 100%;
+        padding: 10px;
+        border-top: 2px solid #d4d121;
+        border-bottom: 2px solid #d4d121;
+        border-right: none;
+        border-left: none;
+        background-color:#272727;
+        cursor: pointer;
+        margin-top: 15px;
+        color: #d4d121;
+    }
+    button:hover {
+        background-color: #d4d121;
+        color: #272727;
+    }
 </style>
 <!DOCTYPE html>
 <html lang="uk">
@@ -37,7 +55,11 @@
 
         <h1>{{ user.first_name }} ({{ user.username }}) {{ user.last_name }}</h1>
         <p>{{ user.avatar }}</p>
-        <img src="{{ '/site_images/ava1.png' }}" alt="Avatar">
+        {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}">
+                    <img src="{{ '/site_images/ava1.png' }}" alt="Avatar">
+                </a>
+            {% endif %}
         <p>Ім'я користувача: {{ user.username }}</p>
         <p>Ім'я: {{ user.first_name }}</p>
         <p>Прізвище: {{ user.last_name }}</p>

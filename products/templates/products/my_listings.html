@@ -35,13 +35,11 @@
         margin: 10px;
         padding: 10px;
         border-bottom: 3px solid #d4d121;
-        border-radius: 10px;
+        border-radius: 5px;
         background-color: #272727;
         max-width: 250px;
     }
     .actions {
-        display: flex;
-        justify-content: center;
         gap: 0px 10px;
     }
 </style>
@@ -51,18 +49,15 @@
         <ul>
             {% for product in products %}
             <li style="display:inline-flex">
-                <a href="{% url 'details' product.id %}">
-                    <h3>{{ product.name }}</h3>
-                    <p>Price: {{ product.price }} ghr</p>
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
-                    {% endif %}
-                    
-                </a>
-                <div class="actions">
+                <div onclick="location.href='/details/{{ product.id }}'">
                     <a href="{% url 'edit_product' product.id %}">Edit</a>
                     <a>/</a>
                     <a href="{% url 'delete_product' product.id %}">Delete</a>
+                    <h3>{{ product.name }}</h3>
+                    <p>Price: {{ product.price }} UAH</p>
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" height="140px">
+                    {% endif %}
                 </div>
             </li>
             {% empty %}

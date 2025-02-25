@@ -12,39 +12,55 @@
         background-image: url("/sprites/back4.png");
     }
     .product-details {
+        display: flex;
         justify-self: center;
         background-color: #1d1d1d;
-            padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            padding-top: 5%;
-            margin-top: 13%;
-            height: 1000px;
-            width: 400px;
-            border-left: 2px solid #d4d121;
-            border-right: 2px solid #d4d121;
+            padding: 2%;
+            margin-top: 0%;
+            height: 80%;
+            border: 2px solid #d4d121;
     }
-    a {
+    .btn {
+        display: inline-flex;
+        top: 80%;
+        width: 100%;
+        padding: 10px;
+        border-top: 2px solid #d4d121;
+        border-bottom: 2px solid #d4d121;
+        border-right: none;
+        border-left: none;
+        background-color:#272727;
+        cursor: pointer;
+        margin-top: 15px;
         color: #d4d121;
-        text-decoration: none;
-        gap: 0px 10px;
     }
+    .btn:hover {
+        background-color: #d4d121;
+        color: #272727;
+    }
+    
 </style>
 <body>
     <div class="product-details">
-        <img src="{{ product.image.url }}" width="400">
-        <h1>{{ product.name }}</h1>
-        <p>{{ product.description }}</p>
-        <p>Price: {{ product.price }}₴</p>
-        <p>Category: {{ product.category }}</p>
-        <p>Author: {{ product.author }}</p>
-        <a href="{% url 'add_to_favorites' product.id %}">
+        <img src="{{ product.image.url }}" style="width:400px; max-height: fit-content;">
+        <div style="margin-left: 3%;margin-top: -5%;">
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.description }}</p>
+            <p>Price: {{ product.price }}₴</p>
+            <p>Description: {{ product.description }}</p>
+            <p>Category: {{ product.category }}</p>
+            <p>Author: {{ product.author }}</p>
+        </span>
+        <span style="padding: 60%; margin-top: 30%;">
+            <a class="btn" href="{% url 'add_to_favorites' product.id %}" style="margin-left: -60%;">
             {% if user in product.favorites.all %}
                 Remove from Cart
             {% else %}
                 Add to Cart
             {% endif %}
-        </a>
+            </a>
     </div>
 </body>
 </html>
