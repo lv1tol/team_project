@@ -281,9 +281,7 @@
         <div class="user-section">
             <a class="add-product" href="/add">Add Product</a>
             <a class="add-product" href="/my_listings">My advertisement</a>
-            <a class="add-product" href="/my_favorites">My favorites</a>
-            <a class="add-product" href="/my_favorites">My favorites</a>
-            
+            <a class="add-product" href="/my_favorites">My Cart</a>            
             <div class="user-info">
                 
                 {% if user.is_authenticated %}
@@ -300,26 +298,27 @@
         {% block content %}
         
         <div class="nav-links">
-            <a href="?category=Авто">Auto</a>
-            <a href="?category=Дім Сад">Home/Garden</a>
-            <a href="?category=Електроніка">Electronics</a>
-            <a href="?category=Одяг">Clothes</a>
-            <a href="?category=Нерухомість">Realty</a>
-            <a href="?category=Для Авто">For Auto</a>
-            <a href="?category=Дитячий Світ">Toys!</a>
-            <a href="?category=Для Геймерів">For Gamers</a>
-            <a href="?category=Інше">Others...</a>
+            <a href="?category=Auto">Auto</a>
+            <a href="?category=Home/Garden">Home/Garden</a>
+            <a href="?category=Electronics">Electronics</a>
+            <a href="?category=Clothes">Clothes</a>
+            <a href="?category=Realty">Realty</a>
+            <a href="?category=For Auto">For Auto</a>
+            <a href="?category=Toys">Toys!</a>
+            <a href="?category=For Gamers">For Gamers</a>
+            <a href="?category=Others">Others...</a>
         </div>
         
         <p class="sort-button2">Order by: price</p>
-        <a href="?sort={% if sort_order == 'asc' %}desc{% else %}asc{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}" 
-        class="sort-button">
+            <a href="?sort={% if sort_order == 'asc' %}desc{% else %}asc{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}" 
+            class="sort-button">
             {% if sort_order == "asc" %}
             <img src="/sprites/order_up.png" width="20px" alt="order">
             {% else %}
             <img src="/sprites/order_down.png" width="20px" alt="order">
             {% endif %}
         </a>
+
         
         <div class="content">
             <h1 style="text-align: center;">Catalog</h1>

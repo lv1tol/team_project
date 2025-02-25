@@ -37,3 +37,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    products = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return f"Order {self.id} by {self.user.username}"
