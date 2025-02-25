@@ -40,9 +40,9 @@
         <p>Author: {{ product.author }}</p>
         <a href="{% url 'add_to_favorites' product.id %}">
             {% if user in product.favorites.all %}
-                Remove from Favorites
+                Remove from Cart
             {% else %}
-                Add to Favorites
+                Add to Cart
             {% endif %}
         </a>
     </div>

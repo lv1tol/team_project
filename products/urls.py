@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from .views import register
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 urlpatterns = [
     path('', product_list, name='product_list'),
@@ -18,6 +19,8 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('logout/', logout_view, name='logout'),
     path('profile/', profile_view, name='profile'),
+    path('buying/', views.buying_view, name='buying'),
+
 
 ]
 if settings.DEBUG:

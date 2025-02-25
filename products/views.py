@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Profile
+from .models import Product, Profile,Order
 from django.http import HttpResponse
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required
@@ -8,15 +8,22 @@ from .forms import RegisterForm
 
 # Список товарів
 def product_list(request):
-    category = request.GET.get("category", "") 
-    if category:
-        products = Product.objects.filter(category=category)
+    sort_order = request.GET.get('sort', 'asc') 
+    selected_category = request.GET.get('category')
+
+    products = Product.objects.all()
+    if selected_category:
+        products = products.filter(category=selected_category)
+
+    if sort_order == 'asc':
+        products = products.order_by('price')
     else:
-        products = Product.objects.all()
+        products = products.order_by('-price')
 
     return render(request, 'products/product_list.html', {
         'products': products,
-        'selected_category': category,
+        'sort_order': sort_order,
+        'selected_category': selected_category,
     })
 
 # Деталі товару
@@ -84,8 +91,21 @@ def add_to_favorites(request, id):
 @login_required
 def my_favorites(request):
     products = Product.objects.filter(favorites=request.user)
-    return render(request, 'products/my_favorites.html', {'products': products})
+    total_price = sum(product.price for product in products)
 
+    if request.method == 'POST':
+        order = Order.objects.create(user=request.user, total_price=total_price)
+        order.products.set(products)
+
+        for product in products:
+            product.favorites.remove(request.user)  
+
+        return redirect('buying')  
+
+    return render(request, 'products/my_favorites.html', {'products': products, 'total_price': total_price})
+@login_required
+def buying_view(request):
+    return render(request, 'products/buying.html')
 # Реєстрація
 def register(request):
     if request.method == 'POST':
