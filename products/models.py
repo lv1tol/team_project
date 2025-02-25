@@ -10,14 +10,14 @@ class Category(models.Model):
 
 class Product(models.Model):
     CATEGORY_CHOICES = [
-        ('Авто', 'Авто'),
-        ('Електроніка', 'Електроніка'),
-        ('Дім сад', 'Дім сад'),
-        ('Одяг', 'Одяг'),
-        ('Нерухомість', 'Нерухомість'),
-        ('Дитячий світ', 'Дитячий світ'),
-        ('Тварини', 'Тварини'),
-        ('Інше', 'Інше'),
+        ('Auto', 'Auto'),
+        ('Electronics', 'Electronics'),
+        ('Home/Garden', 'Home/Garden'),
+        ('Clothes', 'Clothes'),
+        ('Realty', 'Realty'),
+        ('Toys', 'Toys'),
+        ('Animals', 'Animals'),
+        ('Other', 'Other'),
     ]
 
     name = models.CharField(max_length=255)
