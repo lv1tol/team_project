@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 from django.contrib.auth import views as auth_views
-from .views import register
+from .views import register,add_review,product_details
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -21,6 +21,8 @@ urlpatterns = [
     path('profile/', profile_view, name='profile'),
     path('buying/', views.buying_view, name='buying'),
     path("profile/edit/", edit_profile, name="edit_profile"),
+    path('details/<int:product_id>/', product_details, name='product_details'),
+    path('add_review/<int:product_id>/', add_review, name='add_review'),    
     
 
 ]
