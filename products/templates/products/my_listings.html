@@ -11,6 +11,7 @@
         height: 100vh;
         margin: 0;
         font-family: Arial, sans-serif;
+        overflow: auto;
     }
     .container {
         justify-self: center;
@@ -56,7 +57,7 @@
                     <h3>{{ product.name }}</h3>
                     <p>Price: {{ product.price }} UAH</p>
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" height="140px">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" height="40%">
                     {% endif %}
                 </div>
             </li>
