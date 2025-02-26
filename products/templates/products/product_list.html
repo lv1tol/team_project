@@ -243,6 +243,12 @@
 .home-button:hover {
     transform: scale(1.2);
 }
+    .avatar {
+        width: 420px;
+        height: 420px;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
 
 
 </style>
@@ -287,7 +293,7 @@
                 
                 {% if user.is_authenticated %}
                 <a href="{% url 'profile' %}">
-                    <img src="{{ '/site_images/ava1.png' }}" alt="Avatar">
+                    <img class="avatar" src="{{ user.profile.avatar.url }}" alt="Аватар">
                 </a>
                 {% else %}
                 <a href="{% url 'login' %}" style="color: #d4d121;">Log in</a>
@@ -306,7 +312,7 @@
             <a href="?category=Realty">Realty</a>
             <a href="?category=For Auto">For Auto</a>
             <a href="?category=Toys">Toys!</a>
-            <a href="?category=For Gamers">For Gamers</a>
+            <a href="?category=Animals">Animals</a>
             <a href="?category=Others">Others...</a>
         </div>
         
