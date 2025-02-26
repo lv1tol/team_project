@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Profile,Order,Review
 from django.http import HttpResponse
 from .forms import ProductForm
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, update_session_auth_hash
 from .forms import RegisterForm, ProfileForm, UserForm, CustomPasswordChangeForm
@@ -89,14 +90,17 @@ def my_listings(request):
     return render(request, 'products/my_listings.html', {'products': products})
 
 @login_required
-def add_to_favorites(request, id):
-    product = get_object_or_404(Product, id=id)
-    if product.favorites.filter(id=request.user.id).exists():
+def add_to_favorites(request, product_id): 
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.user in product.favorites.all():
         product.favorites.remove(request.user)
+        messages.success(request, "Товар видалено з кошика.")
     else:
         product.favorites.add(request.user)
-    return redirect('product_list')
+        messages.success(request, "Товар додано до кошика!")
 
+    return redirect("product_details", product_id=product.id)
 #  Мої вподобання
 @login_required
 def my_favorites(request):
