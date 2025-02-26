@@ -20,7 +20,8 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('profile/', profile_view, name='profile'),
     path('buying/', views.buying_view, name='buying'),
-
+    path("profile/edit/", edit_profile, name="edit_profile"),
+    
 
 ]
 if settings.DEBUG:

@@ -43,32 +43,25 @@
         color: #272727;
     }
 </style>
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профіль</title>
-</head>
+
 <body>
     <div class="container">
 
-        <h1>{{ user.first_name }} ({{ user.username }}) {{ user.last_name }}</h1>
-        <p>{{ user.avatar }}</p>
+        <h1 style="text-align: center;">{{ user.username }}</h1>
         {% if user.is_authenticated %}
-                <a href="{% url 'profile' %}">
-                    <img src="{{ '/site_images/ava1.png' }}" alt="Avatar">
-                </a>
+        <img class="avatar" src="{{ user.profile.avatar.url }}" alt="Аватар">
             {% endif %}
         <p>Ім'я користувача: {{ user.username }}</p>
         <p>Ім'я: {{ user.first_name }}</p>
         <p>Прізвище: {{ user.last_name }}</p>
         <p>Email: {{ user.email }}</p>
+        <a href="{% url 'edit_profile' %}">
+            <button>Редагувати профіль</button>
+        </a>
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button type="submit">Вийти</button>
         </form>
     </div>
 </body>
-</html>
 {% endblock %}
