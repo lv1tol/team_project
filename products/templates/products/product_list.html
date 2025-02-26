@@ -341,6 +341,7 @@
             <ul id="product-list" class="product-list">
                 {% for product in products %}
                 <li data-price="{{ product.price }}" onclick="location.href='/details/{{ product.id }}'">
+                    <a href="{% url 'delete_product' product.id %}">Delete</a>
                     <h3><strong>{{ product.name }}</strong></h3>
                     {% if product.image %}
                     <img src="{{ product.image.url }}" height="100px">
