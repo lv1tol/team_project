@@ -24,7 +24,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
     description = models.TextField()
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)  
-    image = models.ImageField(upload_to='product_images/', blank=True, null=True)
+    image = models.ImageField(upload_to='product_images/', blank=False, null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     favorites = models.ManyToManyField(User, related_name='favorite_products', blank=True)
 
