@@ -32,7 +32,7 @@
     }
     li {
         list-style-type: none;
-        height: 250px;
+        height: 270px;
         margin: 10px;
         padding: 10px;
         border-bottom: 3px solid #d4d121;
@@ -57,7 +57,7 @@
                     <h3>{{ product.name }}</h3>
                     <p>Price: {{ product.price }} UAH</p>
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" height="40%">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" height="100px">
                     {% endif %}
                 </div>
             </li>
