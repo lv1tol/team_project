@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Profile,Order
+from .models import Product, Profile,Order,Review
 from django.http import HttpResponse
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required
@@ -33,7 +33,17 @@ def details(request, id):
     except Product.DoesNotExist:
         return HttpResponse("Product not found")
     return render(request, "products/details.html", {'product': product})
-
+@login_required
+def add_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == "POST":
+        text = request.POST.get("text")
+        if text:
+            Review.objects.create(user=request.user, product=product, text=text)
+    return redirect("product_details", product_id=product.id)
+def product_details(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, "products/details.html", {"product": product})
 # Додавання товару
 @login_required
 def add_product(request):

@@ -105,6 +105,9 @@
 
             <label for="image">Image:</label>
             <input type="file" name="image">
+            {% if form.image.errors %}
+                <p style="color: red;">{{ form.image.errors.0 }}</p>
+            {% endif %}
 
             <button type="submit">Add</button>
         </form>
